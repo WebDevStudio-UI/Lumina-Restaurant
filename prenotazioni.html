@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prenotazioni | Lumina</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header style="background-color: #111;">
+        <div class="logo">LUMINA</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Il Menu</a></li>
+                <li><a href="prenotazioni.html" class="active btn-gold">Prenota un Tavolo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="reservation-section">
+        <div class="res-container">
+            <div class="res-info">
+                <h2>Vi aspettiamo.</h2>
+                <div class="divider"></div>
+                <p>Le prenotazioni online sono aperte per tavoli fino a 6 persone. Per gruppi più numerosi o eventi privati, vi invitiamo a contattarci direttamente al telefono.</p>
+                <br>
+                <h3>Orari d'Apertura</h3>
+                <p>Martedì - Domenica<br>19:30 - 23:00</p>
+                <p><em>Chiuso il Lunedì</em></p>
+            </div>
+
+            <div class="res-form">
+                <form onsubmit="inviaPrenotazione(event)">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Data</label>
+                            <input type="date" required id="data-prenotazione">
+                        </div>
+                        <div class="input-group">
+                            <label>Persone</label>
+                            <select required>
+                                <option value="1">1 Persona</option>
+                                <option value="2" selected>2 Persone</option>
+                                <option value="3">3 Persone</option>
+                                <option value="4">4 Persone</option>
+                                <option value="5">5 Persone</option>
+                                <option value="6">6 Persone</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group" style="width: 100%;">
+                            <label>Orario</label>
+                            <select required>
+                                <option value="19:30">19:30</option>
+                                <option value="20:00">20:00</option>
+                                <option value="20:30">20:30</option>
+                                <option value="21:00">21:00</option>
+                                <option value="21:30">21:30</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Nome Completo</label>
+                            <input type="text" placeholder="Es. Mario Rossi" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Telefono</label>
+                            <input type="tel" placeholder="Cellulare" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Intolleranze o Richieste Speciali (Opzionale)</label>
+                        <textarea rows="3" placeholder="Allergie, festeggiamenti, ecc..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-gold" style="width: 100%; border:none; cursor:pointer;">Conferma Prenotazione</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
