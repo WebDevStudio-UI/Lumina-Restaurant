@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chi Siamo | Lumina</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0b0906;--bg2:#111009;
+  --gold:#c8a96e;--gold-dim:rgba(200,169,110,0.14);
+  --cream:#ede8df;--muted:#7a7060;
+  --border:rgba(200,169,110,0.15);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:72px;background:linear-gradient(to bottom,rgba(11,9,6,.97) 0%,rgba(11,9,6,0) 100%)}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:300;letter-spacing:.35em;color:var(--gold);text-decoration:none;text-transform:uppercase}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;font-weight:400}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-links a.active{border-bottom:1px solid var(--gold);padding-bottom:2px}
+
+/* HERO */
+.hero{position:relative;z-index:1;padding-top:160px;padding-bottom:80px;text-align:center}
+.hero-eyebrow{font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;opacity:0;animation:fadeUp .8s .2s ease forwards}
+.hero-title{font-family:var(--serif);font-size:clamp(52px,8vw,96px);font-weight:300;font-style:italic;line-height:1;color:var(--cream);letter-spacing:.02em;margin-bottom:24px;opacity:0;animation:fadeUp .8s .4s ease forwards}
+.hero-rule{width:60px;height:1px;background:var(--gold);margin:0 auto 40px;opacity:0;animation:fadeUp .8s .6s ease forwards}
+.hero-lead{font-family:var(--serif);font-size:22px;font-style:italic;color:var(--muted);max-width:640px;margin:0 auto;line-height:1.7;opacity:0;animation:fadeUp .8s .8s ease forwards}
+
+/* MANIFESTO */
+.manifesto{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:100px 60px}
+.manifesto-block{display:grid;grid-template-columns:1fr 2fr;gap:60px;margin-bottom:80px;align-items:start}
+.manifesto-block:nth-child(even){grid-template-columns:2fr 1fr;direction:rtl}
+.manifesto-block:nth-child(even) > *{direction:ltr}
+.manifesto-num{font-family:var(--serif);font-size:80px;font-weight:300;color:rgba(200,169,110,.12);line-height:1}
+.manifesto-content .label{font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.manifesto-content h3{font-family:var(--serif);font-size:32px;font-weight:300;font-style:italic;color:var(--cream);margin-bottom:18px;line-height:1.2}
+.manifesto-content p{font-size:14px;line-height:1.9;color:var(--muted)}
+
+/* TIMELINE */
+.timeline-section{position:relative;z-index:1;padding:80px 60px;border-top:1px solid var(--border)}
+.timeline-section .section-header{text-align:center;margin-bottom:72px}
+.section-header .label{font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.section-header h2{font-family:var(--serif);font-size:clamp(36px,4vw,52px);font-weight:300;font-style:italic;color:var(--cream)}
+.timeline{position:relative;max-width:800px;margin:0 auto}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--border);transform:translateX(-50%)}
+.timeline-item{display:grid;grid-template-columns:1fr 40px 1fr;gap:0 32px;margin-bottom:60px;align-items:center}
+.timeline-item:nth-child(odd) .tl-content{grid-column:1;text-align:right}
+.timeline-item:nth-child(odd) .tl-dot{grid-column:2}
+.timeline-item:nth-child(odd) .tl-empty{grid-column:3}
+.timeline-item:nth-child(even) .tl-empty{grid-column:1}
+.timeline-item:nth-child(even) .tl-dot{grid-column:2}
+.timeline-item:nth-child(even) .tl-content{grid-column:3;text-align:left}
+.tl-dot{width:10px;height:10px;background:var(--gold);transform:rotate(45deg);margin:0 auto;flex-shrink:0;position:relative;z-index:1}
+.tl-year{font-family:var(--serif);font-size:28px;font-weight:300;color:var(--gold);margin-bottom:8px}
+.tl-title{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:6px;letter-spacing:.03em}
+.tl-desc{font-size:12.5px;line-height:1.7;color:var(--muted)}
+
+/* VALUES */
+.values{position:relative;z-index:1;padding:80px 60px 120px;border-top:1px solid var(--border)}
+.values .section-header{text-align:center;margin-bottom:64px}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1100px;margin:0 auto}
+.value-card{padding:48px 36px;border:1px solid var(--border);text-align:center;transition:background .3s,border-color .3s}
+.value-card:hover{background:rgba(200,169,110,.04);border-color:rgba(200,169,110,.3)}
+.value-icon{font-family:var(--serif);font-size:42px;font-style:italic;color:var(--gold);margin-bottom:20px;display:block}
+.value-card h3{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--cream);margin-bottom:14px}
+.value-card p{font-size:13px;line-height:1.8;color:var(--muted)}
+
+/* AWARD BAND */
+.award-band{position:relative;z-index:1;text-align:center;padding:80px 60px;background:linear-gradient(180deg,rgba(200,169,110,.04) 0%,transparent 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.award-band .label{font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.stars-row{display:flex;justify-content:center;gap:24px;margin-bottom:20px}
+.star{font-family:var(--serif);font-size:40px;color:var(--gold)}
+.award-band h2{font-family:var(--serif);font-size:clamp(28px,3.5vw,46px);font-weight:300;font-style:italic;color:var(--cream);margin-bottom:12px}
+.award-band p{font-size:13px;color:var(--muted);letter-spacing:.05em}
+
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:40px 60px;display:flex;align-items:center;justify-content:space-between;margin-top:100px}
+.footer-logo{font-family:var(--serif);font-size:18px;font-weight:300;letter-spacing:.35em;color:var(--gold);text-transform:uppercase}
+.footer-copy{font-size:11px;color:var(--muted);letter-spacing:.1em}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){
+  nav{padding:0 24px}.nav-links{gap:16px}
+  .hero{padding-top:120px;padding-bottom:60px}
+  .manifesto{padding:60px 24px}.manifesto-block,.manifesto-block:nth-child(even){grid-template-columns:1fr;direction:ltr}
+  .manifesto-num{display:none}
+  .timeline-section,.values,.award-band{padding:60px 24px}
+  .timeline::before{left:16px}.timeline-item{grid-template-columns:0 16px 1fr}
+  .timeline-item:nth-child(odd) .tl-content,.timeline-item:nth-child(odd) .tl-empty,.timeline-item:nth-child(even) .tl-empty{display:none}
+  .timeline-item:nth-child(odd) .tl-dot{grid-column:2}.timeline-item:nth-child(odd) .tl-content{grid-column:3;text-align:left;display:block}
+  .values-grid{grid-template-columns:1fr}
+  footer{padding:32px 24px;flex-direction:column;gap:12px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Lumina</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="lumina-menu.html">Il Menu</a></li>
+    <li><a href="chef.html">Gli Chef</a></li>
+    <li><a href="chi-siamo.html" class="active">Chi Siamo</a></li>
+    <li><a href="prenotazioni.html">Prenota</a></li>
+    <li><a href="contatti.html">Contatti</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">La nostra storia</p>
+  <h1 class="hero-title">Chi Siamo</h1>
+  <div class="hero-rule"></div>
+  <p class="hero-lead">Un ristorante nasce da un sogno. Il nostro è quello di portare la luce — la <em>lumina</em> — nel cuore della grande cucina italiana.</p>
+</div>
+
+<section class="manifesto">
+  <div class="manifesto-block">
+    <div class="manifesto-num">01</div>
+    <div class="manifesto-content">
+      <p class="label">Le origini</p>
+      <h3>Una visione nata a Milano</h3>
+      <p>Nel 2018, in un palazzo storico di Piazza della Scala, aprivano le porte di Lumina. Il progetto era ambizioso: creare uno spazio dove l'alta cucina non fosse un esercizio di stile, ma un atto autentico di condivisione. Dove ogni cliente potesse sentirsi accolto, non soltanto servito.</p>
+    </div>
+  </div>
+  <div class="manifesto-block">
+    <div class="manifesto-content">
+      <p class="label">La filosofia</p>
+      <h3>Radici profonde, sguardo aperto</h3>
+      <p>Crediamo nella cucina come atto culturale. I nostri piatti partono sempre da un ingrediente italiano d'eccellenza — il manzo fassona del Piemonte, l'astice dell'Adriatico, lo zafferano aquilano — e lo trasformano attraverso tecniche contemporanee senza mai snaturarne l'anima. La tradizione non è un limite: è la nostra bussola.</p>
+    </div>
+    <div class="manifesto-num">02</div>
+  </div>
+  <div class="manifesto-block">
+    <div class="manifesto-num">03</div>
+    <div class="manifesto-content">
+      <p class="label">Il team</p>
+      <h3>Persone prima di professionisti</h3>
+      <p>Lumina è fatta di ventidue persone che condividono un'idea di ospitalità. In cucina come in sala, il nostro criterio di scelta non è mai stato il curriculum, ma il carattere. Cerchiamo persone curiose, umili, innamorate del proprio mestiere.</p>
+    </div>
+  </div>
+</section>
+
+<section class="timeline-section">
+  <div class="section-header">
+    <p class="label">I nostri traguardi</p>
+    <h2>Una storia in divenire</h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="tl-content">
+        <div class="tl-year">2018</div>
+        <div class="tl-title">L'apertura</div>
+        <div class="tl-desc">Lumina apre a Milano con una carta di dodici portate e una promessa: nessun compromesso sulla qualità.</div>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-empty"></div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-empty"></div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">2019</div>
+        <div class="tl-title">Prima Stella Michelin</div>
+        <div class="tl-desc">Dopo soli undici mesi di attività, arriva il riconoscimento della Guida Michelin con la prima stella.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-content">
+        <div class="tl-year">2021</div>
+        <div class="tl-title">Seconda Stella Michelin</div>
+        <div class="tl-desc">Lumina entra nell'olimpo della ristorazione italiana con la conquista della seconda stella.</div>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-empty"></div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-empty"></div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">2023</div>
+        <div class="tl-title">Tre Forchette Gambero Rosso</div>
+        <div class="tl-desc">Il riconoscimento del Gambero Rosso premia l'eccellenza di sala e cantina, oltre alla cucina.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-content">
+        <div class="tl-year">2026</div>
+        <div class="tl-title">Nuovo menu degustazione</div>
+        <div class="tl-desc">Presentiamo la nostra carta più personale e ambiziosa, frutto di un anno di ricerca e sperimentazione.</div>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-empty"></div>
+    </div>
+  </div>
+</section>
+
+<section class="values">
+  <div class="section-header">
+    <p class="label">I nostri valori</p>
+    <h2>Cosa ci guida ogni giorno</h2>
+  </div>
+  <div class="values-grid">
+    <div class="value-card">
+      <span class="value-icon">I</span>
+      <h3>Ingrediente</h3>
+      <p>Lavoriamo esclusivamente con fornitori selezionati. Ogni prodotto ha un nome, un luogo, una storia. La qualità non è una promessa: è il punto di partenza.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">R</span>
+      <h3>Ricerca</h3>
+      <p>La nostra cucina non è mai ferma. Ogni settimana il team si riunisce per sperimentare, rileggere, migliorare. L'eccellenza non si custodisce: si costruisce ogni giorno.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">A</span>
+      <h3>Accoglienza</h3>
+      <p>Una stella Michelin vale zero se il cliente non si sente a casa. La nostra ospitalità è calorosa, discreta, su misura. Ogni tavolo è un palcoscenico diverso.</p>
+    </div>
+  </div>
+</section>
+
+<div class="award-band">
+  <p class="label">Riconoscimenti</p>
+  <div class="stars-row">
+    <span class="star">★</span>
+    <span class="star">★</span>
+  </div>
+  <h2>Due Stelle Michelin</h2>
+  <p>Guida Michelin Italia 2024 — 2026</p>
+</div>
+
+<footer>
+  <span class="footer-logo">Lumina</span>
+  <span class="footer-copy">© 2026 E.R. Tutti i diritti riservati.</span>
+</footer>
+
+</body>
+</html>
