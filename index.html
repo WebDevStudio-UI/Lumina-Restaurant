@@ -1,78 +1,210 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumina | Fine Dining Restaurant</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumina — Cucina d'Autore</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0b0906;--bg2:#111009;
+  --gold:#c8a96e;--gold-dim:rgba(200,169,110,0.14);
+  --cream:#ede8df;--muted:#7a7060;
+  --border:rgba(200,169,110,0.15);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:72px;background:linear-gradient(to bottom,rgba(11,9,6,.97) 0%,rgba(11,9,6,0) 100%)}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:300;letter-spacing:.35em;color:var(--gold);text-decoration:none;text-transform:uppercase}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;font-weight:400}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-links a.active{border-bottom:1px solid var(--gold);padding-bottom:2px}
+
+/* HERO */
+.hero{position:relative;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:1;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:-1}
+.hero-bg-gradient{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(200,169,110,.07) 0%,transparent 70%)}
+.hero-bg-lines{position:absolute;inset:0;overflow:hidden;opacity:.12}
+.hero-bg-lines::before,.hero-bg-lines::after{content:'';position:absolute;border-radius:50%;border:1px solid var(--gold)}
+.hero-bg-lines::before{width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%)}
+.hero-bg-lines::after{width:500px;height:500px;top:50%;left:50%;transform:translate(-50%,-50%)}
+
+.hero-eyebrow{font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;opacity:0;animation:fadeUp .8s .3s ease forwards}
+.hero-title{font-family:var(--serif);font-size:clamp(72px,12vw,140px);font-weight:300;line-height:1;letter-spacing:.04em;color:var(--cream);margin-bottom:32px;opacity:0;animation:fadeUp .9s .5s ease forwards}
+.hero-title em{font-style:italic;color:var(--gold)}
+.hero-subtitle{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:52px;opacity:0;animation:fadeUp .8s .7s ease forwards}
+.hero-ctas{display:flex;gap:16px;opacity:0;animation:fadeUp .8s .9s ease forwards}
+.btn-primary{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;padding:14px 36px;border:1px solid var(--gold);background:var(--gold-dim);color:var(--gold);text-decoration:none;transition:all .3s;font-weight:400;font-family:var(--sans)}
+.btn-primary:hover{background:rgba(200,169,110,.28);border-color:var(--gold)}
+.btn-ghost{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;padding:14px 36px;border:1px solid var(--border);background:transparent;color:var(--muted);text-decoration:none;transition:all .3s;font-weight:400;font-family:var(--sans)}
+.btn-ghost:hover{color:var(--gold);border-color:rgba(200,169,110,.4)}
+.hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp .8s 1.2s ease forwards}
+.hero-scroll span{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s 1.5s infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
+
+/* INTRO */
+.intro{position:relative;z-index:1;padding:120px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1200px;margin:0 auto;align-items:center}
+.intro-text .label{font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.intro-text h2{font-family:var(--serif);font-size:clamp(38px,4vw,54px);font-weight:300;font-style:italic;line-height:1.2;color:var(--cream);margin-bottom:28px}
+.intro-text p{font-size:14px;line-height:1.9;color:var(--muted);margin-bottom:16px}
+.intro-visual{position:relative}
+.intro-frame{border:1px solid var(--border);padding:40px;aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(180deg,rgba(200,169,110,.03) 0%,rgba(200,169,110,.08) 100%);position:relative;overflow:hidden}
+.intro-frame::before{content:'';position:absolute;top:20px;right:20px;bottom:20px;left:20px;border:1px solid rgba(200,169,110,.08)}
+.intro-frame-label{font-family:var(--serif);font-size:28px;font-style:italic;color:var(--cream);margin-bottom:8px}
+.intro-frame-sub{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.intro-stat{position:absolute;top:-20px;right:-20px;background:var(--bg2);border:1px solid var(--border);padding:20px 24px;text-align:center}
+.intro-stat-num{font-family:var(--serif);font-size:36px;font-weight:300;color:var(--gold);display:block}
+.intro-stat-label{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+
+/* SEPARATOR */
+.sep{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:20px;padding:0 60px;margin:20px 0}
+.sep-line{flex:1;height:1px;background:var(--border)}
+.sep-diamond{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex-shrink:0}
+
+/* FEATURED DISHES */
+.dishes{position:relative;z-index:1;padding:80px 60px 120px;max-width:1200px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:64px}
+.section-header .label{font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.section-header h2{font-family:var(--serif);font-size:clamp(36px,4vw,52px);font-weight:300;font-style:italic;color:var(--cream)}
+.dishes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.dish-card{padding:40px 32px;border:1px solid var(--border);position:relative;transition:background .3s,border-color .3s;text-decoration:none;display:block}
+.dish-card:hover{background:rgba(200,169,110,.04);border-color:rgba(200,169,110,.3)}
+.dish-card .cat{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(200,169,110,.5);margin-bottom:16px}
+.dish-card h3{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--cream);margin-bottom:12px;line-height:1.2}
+.dish-card p{font-size:12.5px;line-height:1.75;color:var(--muted);margin-bottom:20px}
+.dish-card .price{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--gold)}
+.dish-card::after{content:'→';position:absolute;bottom:32px;right:32px;font-size:16px;color:rgba(200,169,110,.3);transition:all .3s}
+.dish-card:hover::after{color:var(--gold);transform:translateX(4px)}
+
+/* RESERVATION BAND */
+.res-band{position:relative;z-index:1;margin:0 60px;border:1px solid var(--border);padding:70px 80px;display:flex;align-items:center;justify-content:space-between;gap:40px;background:linear-gradient(135deg,rgba(200,169,110,.04) 0%,transparent 60%)}
+.res-band::before{content:'';position:absolute;inset:8px;border:1px solid rgba(200,169,110,.06);pointer-events:none}
+.res-band-text .label{font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.res-band-text h2{font-family:var(--serif);font-size:clamp(32px,3vw,46px);font-weight:300;font-style:italic;color:var(--cream);line-height:1.2}
+.res-band-text p{font-size:13px;color:var(--muted);margin-top:12px;max-width:380px;line-height:1.8}
+
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:40px 60px;display:flex;align-items:center;justify-content:space-between;margin-top:100px}
+.footer-logo{font-family:var(--serif);font-size:18px;font-weight:300;letter-spacing:.35em;color:var(--gold);text-transform:uppercase}
+.footer-copy{font-size:11px;color:var(--muted);letter-spacing:.1em}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){
+  nav{padding:0 24px}.nav-links{gap:20px}
+  .intro{grid-template-columns:1fr;padding:80px 24px;gap:40px}
+  .intro-visual{display:none}
+  .dishes{padding:60px 24px}.dishes-grid{grid-template-columns:1fr}
+  .res-band{flex-direction:column;text-align:center;margin:0 24px;padding:48px 32px}
+  footer{padding:32px 24px;flex-direction:column;gap:12px;text-align:center}
+  .sep{padding:0 24px}
+  .hero-ctas{flex-direction:column;align-items:center}
+}
+</style>
 </head>
 <body>
-    <header>
-        <div class="logo">LUMINA</div>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="menu.html">Il Menu</a></li>
-                <li><a href="prenotazioni.html" class="btn-gold">Prenota un Tavolo</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section class="hero-parallax">
-        <div class="hero-overlay">
-            <h1>L'Arte del Gusto</h1>
-            <p>Un'esperienza culinaria multisensoriale nel cuore della città.</p>
-            <a href="prenotazioni.html" class="btn-gold-outline">Riserva il tuo posto</a>
-        </div>
-    </section>
+<nav>
+  <a href="index.html" class="nav-logo">Lumina</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="lumina-menu.html">Il Menu</a></li>
+    <li><a href="chef.html">Gli Chef</a></li>
+    <li><a href="chi-siamo.html">Chi Siamo</a></li>
+    <li><a href="prenotazioni.html">Prenota</a></li>
+    <li><a href="contatti.html">Contatti</a></li>
+  </ul>
+</nav>
 
-    <section class="story-section">
-        <div class="story-content">
-            <div class="story-text">
-                <h2>La Nostra Filosofia</h2>
-                <div class="divider"></div>
-                <p>Guidati dallo Chef Stellato Marco Rossi, trasformiamo materie prime a chilometro zero in opere d'arte contemporanee. Lumina non è solo un ristorante, è un viaggio attraverso i sapori autentici della nostra terra, reinterpretati con tecniche all'avanguardia e passione inesauribile.</p>
-                <a href="menu.html" class="link-discover">Scopri le nostre creazioni &rarr;</a>
-            </div>
-            <div class="story-image">
-                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=800&auto=format&fit=crop" alt="Chef all'opera">
-            </div>
-        </div>
-    </section>
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-bg-gradient"></div>
+    <div class="hero-bg-lines"></div>
+  </div>
+  <p class="hero-eyebrow">Milano — Dal 2018</p>
+  <h1 class="hero-title">Lu<em>mi</em>na</h1>
+  <p class="hero-subtitle">Cucina d'autore — Alta gastronomia italiana</p>
+  <div class="hero-ctas">
+    <a href="prenotazioni.html" class="btn-primary">Prenota un Tavolo</a>
+    <a href="lumina-menu.html" class="btn-ghost">Scopri il Menu</a>
+  </div>
+  <div class="hero-scroll">
+    <span>Scopri</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
 
-    <section class="signature-dishes">
-        <h2>I Grandi Classici</h2>
-        <div class="divider center"></div>
-        <div class="dish-grid">
-            <div class="dish-card">
-                <div class="img-wrapper"><img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=800&auto=format&fit=crop" alt="Pasta Tartufo"></div>
-                <h3>Linguine al Tartufo Nero</h3>
-                <p>Pasta trafilata al bronzo, burro di malga e scaglie di tartufo nero pregiato.</p>
-            </div>
-            <div class="dish-card">
-                <div class="img-wrapper"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop" alt="Costata"></div>
-                <h3>Costata frollata 60 giorni</h3>
-                <p>Taglio pregiato servito con patate novelle al rosmarino e fondo bruno.</p>
-            </div>
-            <div class="dish-card">
-                <div class="img-wrapper"><img src="https://images.unsplash.com/photo-1560717845-968823efbee1?q=80&w=800&auto=format&fit=crop" alt="Salmone"></div>
-                <h3>Salmone Reale</h3>
-                <p>Laccato al miele e soia, accompagnato da asparagi croccanti e crema di zafferano.</p>
-            </div>
-        </div>
-    </section>
+<div class="sep"><div class="sep-line"></div><div class="sep-diamond"></div><div class="sep-line"></div></div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">LUMINA</div>
-            <p>Via Roma 123, 20100 Milano | +39 02 888 999 00</p>
-            <div class="socials">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-            </div>
-        </div>
-    </footer>
+<section class="intro">
+  <div class="intro-text">
+    <p class="label">La nostra filosofia</p>
+    <h2>Dove la luce incontra il gusto</h2>
+    <p>Lumina nasce da una visione semplice quanto audace: trasformare ogni cena in un'esperienza sensoriale completa. Ogni piatto è un racconto, ogni ingrediente una scelta meditata, ogni sapore un viaggio attraverso la tradizione italiana riletta con occhio contemporaneo.</p>
+    <p>Il nostro chef Executive porta con sé vent'anni di ricerca gastronomica tra le cucine di Parigi, Tokyo e Madrid, traducendo ogni influenza nel linguaggio puro e rigoroso della grande cucina italiana.</p>
+    <a href="chi-siamo.html" class="btn-ghost" style="display:inline-block;margin-top:16px">La nostra storia</a>
+  </div>
+  <div class="intro-visual">
+    <div class="intro-frame">
+      <div class="intro-frame-label">La sala</div>
+      <div class="intro-frame-sub">Piazza della Scala 4, Milano</div>
+    </div>
+    <div class="intro-stat">
+      <span class="intro-stat-num">2 ★</span>
+      <span class="intro-stat-label">Stelle Michelin</span>
+    </div>
+  </div>
+</section>
+
+<div class="sep"><div class="sep-line"></div><div class="sep-diamond"></div><div class="sep-line"></div></div>
+
+<section class="dishes">
+  <div class="section-header">
+    <p class="label">I protagonisti del menu</p>
+    <h2>Signature dishes</h2>
+  </div>
+  <div class="dishes-grid">
+    <a href="lumina-menu.html" class="dish-card" style="animation-delay:.1s">
+      <p class="cat">Antipasto</p>
+      <h3>Capesante Scottate</h3>
+      <p>Crema di topinambur, guanciale croccante, polvere di caffè.</p>
+      <span class="price">€ 26</span>
+    </a>
+    <a href="lumina-menu.html" class="dish-card" style="animation-delay:.2s">
+      <p class="cat">Secondo</p>
+      <h3>Astice Blu</h3>
+      <p>Cotto a bassa temperatura, beurre blanc al Franciacorta, caviale.</p>
+      <span class="price">€ 45</span>
+    </a>
+    <a href="lumina-menu.html" class="dish-card" style="animation-delay:.3s">
+      <p class="cat">Dolce</p>
+      <h3>Sfera di Cioccolato</h3>
+      <p>Cioccolato fondente 72%, cuore di lamponi, crumble al cacao salato.</p>
+      <span class="price">€ 14</span>
+    </a>
+  </div>
+</section>
+
+<div class="res-band">
+  <div class="res-band-text">
+    <p class="label">Riservate la vostra serata</p>
+    <h2>Un tavolo per voi,<br>un'esperienza unica</h2>
+    <p>Disponibilità limitata. Consigliamo di prenotare con almeno una settimana di anticipo per assicurarvi il tavolo desiderato.</p>
+  </div>
+  <a href="prenotazioni.html" class="btn-primary">Prenota Ora</a>
+</div>
+
+<footer>
+  <span class="footer-logo">Lumina</span>
+  <span class="footer-copy">© 2026 E.R. Tutti i diritti riservati.</span>
+</footer>
+
 </body>
 </html>
