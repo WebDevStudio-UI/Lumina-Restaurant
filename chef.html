@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gli Chef | Lumina</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0b0906;--bg2:#111009;
+  --gold:#c8a96e;--gold-dim:rgba(200,169,110,0.14);
+  --cream:#ede8df;--muted:#7a7060;
+  --border:rgba(200,169,110,0.15);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:72px;background:linear-gradient(to bottom,rgba(11,9,6,.97) 0%,rgba(11,9,6,0) 100%)}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:300;letter-spacing:.35em;color:var(--gold);text-decoration:none;text-transform:uppercase}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;font-weight:400}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-links a.active{border-bottom:1px solid var(--gold);padding-bottom:2px}
+
+.hero{position:relative;z-index:1;padding-top:160px;padding-bottom:80px;text-align:center}
+.hero-eyebrow{font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;opacity:0;animation:fadeUp .8s .2s ease forwards}
+.hero-title{font-family:var(--serif);font-size:clamp(52px,8vw,96px);font-weight:300;font-style:italic;line-height:1;color:var(--cream);letter-spacing:.02em;margin-bottom:24px;opacity:0;animation:fadeUp .8s .4s ease forwards}
+.hero-rule{width:60px;height:1px;background:var(--gold);margin:0 auto 40px;opacity:0;animation:fadeUp .8s .6s ease forwards}
+.hero-lead{font-family:var(--serif);font-size:22px;font-style:italic;color:var(--muted);max-width:600px;margin:0 auto;line-height:1.7;opacity:0;animation:fadeUp .8s .8s ease forwards}
+
+/* CHEF LEAD — executive chef, full width */
+.chef-lead{position:relative;z-index:1;max-width:1200px;margin:100px auto 0;padding:0 60px}
+.chef-lead-inner{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border)}
+.chef-lead-portrait{position:relative;background:linear-gradient(135deg,rgba(200,169,110,.06) 0%,rgba(200,169,110,.02) 100%);display:flex;align-items:center;justify-content:center;min-height:480px;overflow:hidden}
+.chef-lead-portrait::before{content:'';position:absolute;inset:20px;border:1px solid rgba(200,169,110,.08)}
+.portrait-initial{font-family:var(--serif);font-size:120px;font-weight:300;font-style:italic;color:rgba(200,169,110,.2);user-select:none}
+.chef-lead-info{padding:60px 52px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border)}
+.chef-tag{display:inline-flex;align-items:center;gap:8px;margin-bottom:24px}
+.chef-tag-line{width:24px;height:1px;background:var(--gold)}
+.chef-tag-text{font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold)}
+.chef-name{font-family:var(--serif);font-size:clamp(38px,4vw,54px);font-weight:300;color:var(--cream);margin-bottom:6px;line-height:1.1}
+.chef-role{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:32px}
+.chef-stars{display:flex;gap:8px;margin-bottom:28px}
+.star{font-family:var(--serif);font-size:22px;color:var(--gold)}
+.chef-bio{font-size:14px;line-height:1.95;color:var(--muted);margin-bottom:32px}
+.chef-origin{font-family:var(--serif);font-size:16px;font-style:italic;color:rgba(200,169,110,.6)}
+.chef-signature-dish{margin-top:36px;padding-top:32px;border-top:1px solid var(--border)}
+.dish-label{font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.dish-name{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--cream);margin-bottom:6px}
+.dish-desc{font-size:12px;color:var(--muted);line-height:1.6}
+
+/* SUPPORTING CHEFS */
+.chefs-section{position:relative;z-index:1;padding:100px 60px 60px;max-width:1200px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:64px}
+.section-header .label{font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.section-header h2{font-family:var(--serif);font-size:clamp(36px,4vw,52px);font-weight:300;font-style:italic;color:var(--cream)}
+.chefs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.chef-card{border:1px solid var(--border);overflow:hidden;transition:border-color .3s}
+.chef-card:hover{border-color:rgba(200,169,110,.35)}
+.chef-card-portrait{height:240px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(200,169,110,.05) 0%,rgba(200,169,110,.01) 100%);position:relative;overflow:hidden;transition:background .4s}
+.chef-card:hover .chef-card-portrait{background:linear-gradient(135deg,rgba(200,169,110,.09) 0%,rgba(200,169,110,.03) 100%)}
+.chef-card-portrait::after{content:'';position:absolute;inset:16px;border:1px solid rgba(200,169,110,.07)}
+.card-initial{font-family:var(--serif);font-size:72px;font-weight:300;font-style:italic;color:rgba(200,169,110,.18);user-select:none}
+.chef-card-body{padding:32px 28px}
+.chef-card-tag{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.chef-card-name{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--cream);margin-bottom:4px;line-height:1.2}
+.chef-card-role{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+.chef-card-bio{font-size:13px;line-height:1.8;color:var(--muted);margin-bottom:20px}
+.chef-card-origin{font-family:var(--serif);font-size:14px;font-style:italic;color:rgba(200,169,110,.55)}
+.chef-card-dish{margin-top:20px;padding-top:18px;border-top:1px solid var(--border)}
+.chef-card-dish .dish-label{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.chef-card-dish .dish-name{font-family:var(--serif);font-size:17px;color:var(--cream)}
+
+/* PHILOSOPHY QUOTE */
+.quote-band{position:relative;z-index:1;text-align:center;padding:80px 60px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.quote-mark{font-family:var(--serif);font-size:80px;line-height:.6;color:rgba(200,169,110,.2);margin-bottom:20px;display:block}
+.quote-text{font-family:var(--serif);font-size:clamp(22px,3vw,36px);font-weight:300;font-style:italic;color:var(--cream);max-width:760px;margin:0 auto 28px;line-height:1.5}
+.quote-author{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:40px 60px;display:flex;align-items:center;justify-content:space-between;margin-top:80px}
+.footer-logo{font-family:var(--serif);font-size:18px;font-weight:300;letter-spacing:.35em;color:var(--gold);text-transform:uppercase}
+.footer-copy{font-size:11px;color:var(--muted);letter-spacing:.1em}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){
+  nav{padding:0 24px}.nav-links{gap:16px}
+  .chef-lead{padding:0 16px;margin-top:60px}
+  .chef-lead-inner{grid-template-columns:1fr}
+  .chef-lead-portrait{min-height:220px}
+  .chef-lead-info{padding:36px 28px;border-left:none;border-top:1px solid var(--border)}
+  .chefs-section{padding:60px 16px}
+  .chefs-grid{grid-template-columns:1fr}
+  .quote-band{padding:60px 24px}
+  footer{padding:32px 24px;flex-direction:column;gap:12px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Lumina</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="lumina-menu.html">Il Menu</a></li>
+    <li><a href="chef.html" class="active">Gli Chef</a></li>
+    <li><a href="chi-siamo.html">Chi Siamo</a></li>
+    <li><a href="prenotazioni.html">Prenota</a></li>
+    <li><a href="contatti.html">Contatti</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">La brigata di cucina</p>
+  <h1 class="hero-title">Gli Chef Stellati</h1>
+  <div class="hero-rule"></div>
+  <p class="hero-lead">Dietro ogni piatto c'è una mente, una storia, una visione. Conoscete le persone che danno forma alla nostra cucina.</p>
+</div>
+
+<div class="chef-lead">
+  <div class="chef-lead-inner">
+    <div class="chef-lead-portrait">
+      <span class="portrait-initial">E</span>
+    </div>
+    <div class="chef-lead-info">
+      <div class="chef-tag">
+        <div class="chef-tag-line"></div>
+        <span class="chef-tag-text">Executive Chef &amp; Fondatore</span>
+      </div>
+      <h2 class="chef-name">Edoardo<br>Romani</h2>
+      <p class="chef-role">Direttore Creativo — Lumina dal 2018</p>
+      <div class="chef-stars">
+        <span class="star">★</span>
+        <span class="star">★</span>
+      </div>
+      <p class="chef-bio">Nato a Torino nel 1982, Edoardo Romani ha costruito la propria formazione tra le cucine di Alain Ducasse a Parigi, Ferran Adrià a Barcellona e Yoshihiro Narisawa a Tokyo. Ha fatto ritorno in Italia con la consapevolezza che la tradizione culinaria italiana fosse la più ricca e inesplorata del mondo. Nel 2018 ha fondato Lumina come manifesto di questa visione: cucina italiana nell'anima, senza confini nella tecnica.</p>
+      <p class="chef-bio">Le sue due stelle Michelin — conseguite in tempi record — sono il riflesso di una filosofia rigorosa: nessuna ostentazione, nessuna scorciatoia. Solo ingredienti veri, idee precise e una cura ossessiva per ogni dettaglio.</p>
+      <p class="chef-origin">Torino, 1982</p>
+      <div class="chef-signature-dish">
+        <p class="dish-label">Piatto signature</p>
+        <p class="dish-name">Risotto Riserva</p>
+        <p class="dish-desc">Zafferano in pistilli, midollo arrosto, riduzione di ossobuco. Il piatto che racconta tutto ciò che siamo.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="chefs-section">
+  <div class="section-header">
+    <p class="label">La brigata</p>
+    <h2>I talenti di Lumina</h2>
+  </div>
+  <div class="chefs-grid">
+
+    <div class="chef-card">
+      <div class="chef-card-portrait">
+        <span class="card-initial">S</span>
+      </div>
+      <div class="chef-card-body">
+        <p class="chef-card-tag">Chef de Cuisine</p>
+        <h3 class="chef-card-name">Sofia Marchetti</h3>
+        <p class="chef-card-role">Cucina — Lumina dal 2019</p>
+        <p class="chef-card-bio">Bolognese di nascita e anima, Sofia guida la brigata con una precisione millimetrica e una sensibilità rara. La sua specialità sono i primi piatti: la pasta fresca è per lei un linguaggio, non una tecnica.</p>
+        <p class="chef-card-origin">Bologna, 1990</p>
+        <div class="chef-card-dish">
+          <p class="dish-label">Piatto signature</p>
+          <p class="dish-name">Bottoni Ripieni</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chef-card">
+      <div class="chef-card-portrait">
+        <span class="card-initial">L</span>
+      </div>
+      <div class="chef-card-body">
+        <p class="chef-card-tag">Chef Pasticcere</p>
+        <h3 class="chef-card-name">Lorenzo Ferri</h3>
+        <p class="chef-card-role">Pasticceria — Lumina dal 2020</p>
+        <p class="chef-card-bio">Formatosi alla Scuola del Cioccolato di Torino e poi all'École Valrhona di Tain-l'Hermitage, Lorenzo trasforma il dessert in un atto poetico. I suoi dolci chiudono il pasto con la stessa intensità narrativa con cui Edoardo lo apre.</p>
+        <p class="chef-card-origin">Genova, 1993</p>
+        <div class="chef-card-dish">
+          <p class="dish-label">Piatto signature</p>
+          <p class="dish-name">Sfera di Cioccolato</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chef-card">
+      <div class="chef-card-portrait">
+        <span class="card-initial">A</span>
+      </div>
+      <div class="chef-card-body">
+        <p class="chef-card-tag">Chef de Partie — Mare</p>
+        <h3 class="chef-card-name">Alessia Conti</h3>
+        <p class="chef-card-role">Cucina — Lumina dal 2022</p>
+        <p class="chef-card-bio">Cresciuta tra i mercati del pesce di Palermo, Alessia porta nel piatto l'essenza del mare. La sua capacità di esaltare un crostaceo senza mai sopraffarlo è diventata uno dei tratti distintivi del menu degustazione.</p>
+        <p class="chef-card-origin">Palermo, 1995</p>
+        <div class="chef-card-dish">
+          <p class="dish-label">Piatto signature</p>
+          <p class="dish-name">Astice Blu</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="quote-band">
+  <span class="quote-mark">"</span>
+  <p class="quote-text">La cucina non è mai stata un lavoro per me. È il modo in cui cerco di capire il mondo e di restituirlo a chi si siede a tavola.</p>
+  <p class="quote-author">Edoardo Romani — Executive Chef</p>
+</div>
+
+<footer>
+  <span class="footer-logo">Lumina</span>
+  <span class="footer-copy">© 2026 E.R. Tutti i diritti riservati.</span>
+</footer>
+
+</body>
+</html>
